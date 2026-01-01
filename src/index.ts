@@ -37,7 +37,7 @@ interface EventData {
 
 class FormGuardSDK {
   private apiKey: string = "";
-  private apiUrl: string = "http://localhost:5000/api/v1/ingestion";
+  private apiUrl: string = "https://formguard-api.vercel.app/api/v1/ingestion";
   private debug: boolean = false;
   private sessionId: string = "";
   private startTime: number = 0;
