@@ -46,7 +46,7 @@ yarn add @formguard/sdk
 
 ### 1. Get Your API Key
 
-Sign up at [formguard.com](https://formguard.com) and create a form to get your API key.
+Sign up at [formguard](https://formguard-mu.vercel.app) and create a form to get your API key.
 
 ### 2. Basic Usage (Vanilla JavaScript)
 
@@ -704,7 +704,7 @@ FormGuard is GDPR compliant:
 - Data is encrypted in transit and at rest
 - Users can request data deletion
 - Data retention policies in place
-- Privacy policy available at formguard.com/privacy
+- Privacy policy available at formguard-mu.vercel.app/privacy
 
 ### Data Storage
 
@@ -718,7 +718,7 @@ FormGuard is GDPR compliant:
 
 ### How much does FormGuard cost?
 
-See pricing at [formguard.com/pricing](https://formguard.com/pricing)
+See pricing at [formguard pricing](https://formguard-mu.vercel.app/#pricing)
 
 - **Free**: 100 submissions/month
 - **Starter**: $9/mo - 1,000 submissions
@@ -769,7 +769,7 @@ False positives are rare, and you can always review flagged submissions.
 
 ### Documentation
 
-Full documentation: [docs.formguard.com](https://docs.formguard.com)
+Full documentation: [formguard docs](https://www.npmjs.com/package/@formguard/sdk)
 
 ### Issues
 
@@ -825,9 +825,9 @@ Built with ❤️ by [Omair Khoder](https://github.com/OmAiR1Kh)
 
 ## Links
 
-- 🌐 Website: [formguard.com](https://formguard.com)
+- 🌐 Website: [formguard](https://formguard-mu.vercel.app)
 - 📦 NPM: [@formguard/sdk](https://www.npmjs.com/package/@formguard/sdk)
-- 📚 Documentation: [docs.formguard.com](https://docs.formguard.com)
+- 📚 Documentation: [formguard](https://www.npmjs.com/package/@formguard/sdk)
 - 🐙 GitHub: [github.com/OmAiR1Kh/formguard-sdk](https://github.com/OmAiR1Kh/formguard-sdk)
 - 🐦 Twitter: [@formguard](https://twitter.com/formguard)
 
@@ -839,4 +839,4 @@ Built with ❤️ by [Omair Khoder](https://github.com/OmAiR1Kh)
 npm install @formguard/sdk
 ```
 
-[Get Started →](https://formguard.com/signup)
+[Get Started →](https://formguard-mu.vercel.app/register)
