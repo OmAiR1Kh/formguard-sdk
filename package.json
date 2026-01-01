@@ -1,6 +1,6 @@
 {
   "name": "@formguard/sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "FormGuard JavaScript SDK for form intelligence and lead quality scoring",
   "main": "dist/formguard.js",
   "module": "dist/formguard.esm.js",
