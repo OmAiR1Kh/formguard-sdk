@@ -1,0 +1,27 @@
+# Source files
+src/
+test/
+tests/
+*.test.ts
+*.spec.ts
+
+# Config files
+tsconfig.json
+rollup.config.js
+.eslintrc
+.prettierrc
+
+# Development
+node_modules/
+.git/
+.github/
+.vscode/
+.idea/
+
+# Build artifacts
+*.log
+*.tgz
+.DS_Store
+
+# Test files
+test.html

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FormGuard SDK Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      button {
+        background: #3b82f6;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background: #2563eb;
+      }
+      #result {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 4px;
+        display: none;
+      }
+      .success {
+        background: #d1fae5;
+        border: 1px solid #10b981;
+        color: #065f46;
+      }
+      .error {
+        background: #fee2e2;
+        border: 1px solid #ef4444;
+        color: #991b1b;
+      }
+      .blocked {
+        background: #fef3c7;
+        border: 1px solid #f59e0b;
+        color: #92400e;
+      }
+      .step-buttons {
+        margin-bottom: 20px;
+      }
+      .step-buttons button {
+        margin-right: 10px;
+        background: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>FormGuard SDK Test</h1>
+
+    <div class="step-buttons">
+      <button onclick="trackStep(1)">Track Step 1</button>
+      <button onclick="trackStep(2)">Track Step 2</button>
+      <button onclick="trackStep(3)">Track Step 3</button>
+      <button onclick="trackError()">Track Error</button>
+    </div>
+
+    <form id="testForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input type="text" id="company" />
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" rows="4"></textarea>
+      </div>
+
+      <button type="submit">Submit Form</button>
+    </form>
+
+    <div id="result"></div>
+
+    <!-- Load the SDK -->
+    <script src="dist/formguard.js"></script>
+
+    <script>
+      // REPLACE THIS WITH YOUR ACTUAL API KEY
+      // You'll get this after creating a form via API
+      const API_KEY =
+        "fg_live_7ad0f83f3ee665fc6b459f208b702d3a001bef9fcd5e6b5f";
+
+      // Initialize FormGuard with debug mode
+      FormGuard.init({
+        apiKey: API_KEY,
+        apiUrl: "http://localhost:5000/api/v1/ingestion",
+        debug: true, // See logs in console
+      });
+
+      // Track step functions
+      function trackStep(step) {
+        FormGuard.trackStep(step);
+        console.log("Step tracked:", step);
+      }
+
+      function trackError() {
+        FormGuard.trackError("email", "Invalid email format");
+        console.log("Error tracked");
+      }
+
+      // Handle form submission
+      document
+        .getElementById("testForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const form = e.target;
+          const resultDiv = document.getElementById("result");
+
+          // Show loading
+          resultDiv.style.display = "block";
+          resultDiv.className = "";
+          resultDiv.innerHTML = "Submitting...";
+
+          try {
+            const result = await FormGuard.submit({
+              email: form.email.value,
+              fields: {
+                name: form.name.value,
+                company: form.company.value,
+                message: form.message.value,
+              },
+            });
+
+            console.log("Submission result:", result);
+
+            // Show result
+            if (result.action === "allowed") {
+              resultDiv.className = "success";
+              resultDiv.innerHTML = `
+            <strong>✅ Submission Allowed</strong><br>
+            Quality Score: ${result.qualityScore}/100<br>
+            Submission ID: ${result.submissionId}
+          `;
+            } else if (result.action === "flagged") {
+              resultDiv.className = "blocked";
+              resultDiv.innerHTML = `
+            <strong>⚠️ Submission Flagged</strong><br>
+            Quality Score: ${result.qualityScore}/100<br>
+            Flags: ${JSON.stringify(result.flags)}
+          `;
+            } else {
+              resultDiv.className = "error";
+              resultDiv.innerHTML = `
+            <strong>🚫 Submission Blocked</strong><br>
+            Quality Score: ${result.qualityScore}/100<br>
+            Flags: ${JSON.stringify(result.flags)}
+          `;
+            }
+          } catch (error) {
+            console.error("Submission error:", error);
+            resultDiv.className = "error";
+            resultDiv.innerHTML = `
+          <strong>❌ Error</strong><br>
+          ${error.message}
+        `;
+          }
+        });
+    </script>
+  </body>
+</html>

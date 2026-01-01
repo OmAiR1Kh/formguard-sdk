@@ -1,0 +1,45 @@
+{
+  "name": "@formguard/sdk",
+  "version": "1.0.0",
+  "description": "FormGuard JavaScript SDK for form intelligence and lead quality scoring",
+  "main": "dist/formguard.js",
+  "module": "dist/formguard.esm.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "form",
+    "analytics",
+    "lead-scoring",
+    "bot-detection",
+    "form-validation",
+    "lead-quality",
+    "spam-detection",
+    "formguard"
+  ],
+  "author": "Omair Khoder <omair.khoder.01@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OmAiR1Kh/formguard-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/omairkhoder/formguard-sdk/issues"
+  },
+  "homepage": "https://formguard.com",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.5",
+    "rollup": "^4.9.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  }
+}
